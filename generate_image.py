@@ -51,7 +51,7 @@ draw = ImageDraw.Draw(image)
 
 # Load font
 try:
-    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 88)
+    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 except:
     font = ImageFont.load_default()
 
@@ -93,7 +93,16 @@ image.save(OUTPUT_IMAGE)
 # Send to Telegram
 url = f"https://api.telegram.org/bot{TOKEN}/sendPhoto"
 files = {"photo": open(OUTPUT_IMAGE, "rb")}
-data = {"chat_id": CHANNEL, "caption": "#Motivation #Quotes #StayInspired"}
+data = {
+    "chat_id": CHANNEL,
+    "caption": (
+        "#Motivation #Quotes #StayInspired\n"
+        "Join our Telegram bot for a daily boost 💪\n"
+        "#DailyMotivation #MotivationBot #TelegramChannel #MindsetMatters "
+        "#GrowthMindset #PositiveVibesOnly #FollowForMotivation"
+    )
+}
+
 res = requests.post(url, data=data, files=files)
 print(f"✅ Sent Quote #{index + 1} at {now.isoformat()}")
 
