@@ -51,7 +51,7 @@ draw = ImageDraw.Draw(image)
 
 # Load font
 try:
-    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
+    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 14)
 except:
     font = ImageFont.load_default()
 
