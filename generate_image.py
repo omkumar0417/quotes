@@ -85,3 +85,4 @@ print(f"✅ Sent Quote #{index + 1}")
 used_data[str(index)] = now.isoformat()
 with open(USED_QUOTES_FILE, "w") as f:
     json.dump(used_data, f)
+
