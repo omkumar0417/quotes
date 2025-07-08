@@ -51,7 +51,7 @@ draw = ImageDraw.Draw(image)
 
 # Load font
 try:
-    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 48)
+    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 65)
 except:
     font = ImageFont.load_default()
 
@@ -70,6 +70,8 @@ for word in words:
 wrapped_lines.append(line)
 
 # Add handle line
+wrapped_lines.append("")
+wrapped_lines.append("")
 wrapped_lines.append("")
 wrapped_lines.append("Follow: @unfilteredquotes for more.")
 
