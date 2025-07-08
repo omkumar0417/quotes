@@ -23,7 +23,8 @@ with open(QUOTES_FILE, "r", encoding="utf-8") as f:
 # Load used quote memory
 if os.path.exists(USED_QUOTES_FILE):
     with open(USED_QUOTES_FILE, "r") as f:
-        used_data = json.load(f)
+        content = f.read().strip()
+        used_data = json.loads(content) if content else {}
 else:
     used_data = {}
 
@@ -45,9 +46,9 @@ quote = quotes[index]
 image = Image.open(BACKGROUND_IMAGE).convert("RGB")
 draw = ImageDraw.Draw(image)
 
-# Use a default font if custom not found
+# Load font
 try:
-    font = ImageFont.truetype("arial.ttf", 42)
+    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 42)
 except:
     font = ImageFont.load_default()
 
@@ -65,10 +66,19 @@ for word in words:
         line = word
 lines.append(line)
 
+# Debug print
+print("Rendering quote:")
+for l in lines:
+    print(l)
+
+# Draw text with shadow
 y = image.height // 2 - (len(lines) * 30)
 for line in lines:
     w = draw.textlength(line, font=font)
     x = (image.width - w) // 2
+    # Shadow
+    draw.text((x + 2, y + 2), line, font=font, fill="black")
+    # Main text
     draw.text((x, y), line, font=font, fill="white")
     y += 55
 
@@ -80,9 +90,9 @@ files = {"photo": open(OUTPUT_IMAGE, "rb")}
 data = {"chat_id": CHANNEL, "caption": "#Motivation #Quotes #StayInspired"}
 res = requests.post(url, data=data, files=files)
 print(f"✅ Sent Quote #{index + 1}")
+print("Telegram Response:", res.status_code, res.text)
 
 # Save updated memory
 used_data[str(index)] = now.isoformat()
 with open(USED_QUOTES_FILE, "w") as f:
     json.dump(used_data, f)
-
