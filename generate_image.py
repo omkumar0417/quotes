@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 # Constants
 QUOTES_FILE = "quotes.txt"
 USED_QUOTES_FILE = "used_quotes.json"
-BACKGROUND_IMAGE = "background.png"
+BACKGROUND_IMAGE = "background.jpg"
 OUTPUT_IMAGE = "quote_output.png"
 MAX_MEMORY_HOURS = 24
 
